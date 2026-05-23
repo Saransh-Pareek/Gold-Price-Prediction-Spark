@@ -1,0 +1,30 @@
+# --- configuration for Gold vs USD 1-hour analytics ---
+
+# local path to your dataset
+input_path: data/XAU_1h_data.csv
+
+# mapping of important columns (now matches your CSV headers exactly)
+columns:
+  ts: Date
+  open: Open
+  high: High
+  low: Low
+  close: Close
+  volume: Volume
+
+# output folders
+curated_dir: outputs/curated
+feature_dir: outputs/features
+output_dir: outputs
+
+# model / analytics parameters
+forecast_horizon_intervals: 24     # predict 1 day ahead (24 hours)
+test_fraction: 0.2
+random_seed: 42
+cluster_k: 4
+zscore_threshold: 2.5
+
+# optional for later visual tasks
+midday_start: "10:00"
+midday_end:   "15:00"
+ramp_window_end: "20:00"

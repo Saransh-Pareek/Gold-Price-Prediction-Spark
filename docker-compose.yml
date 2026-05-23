@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: xau
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  notebook:
+    image: jupyter/pyspark-notebook:latest
+    environment:
+      JUPYTER_TOKEN: letmein
+    ports:
+      - "8889:8888"     # use 8889 on your Mac to avoid conflicts
+    volumes:
+      - ./:/work
+    working_dir: /work
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
